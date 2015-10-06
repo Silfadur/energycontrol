@@ -40,8 +40,8 @@ function init()
   r=peripheral.wrap("bottom")
   cell1=peripheral.wrap("tile_thermalexpansion_cell_resonant_name_0")
   cell2=peripheral.wrap("tile_thermalexpansion_cell_resonant_name_1")
+  i1,i2,i3,i4 = false
   return (mon and r and cell1 and cell2)
-  i1,i2,i3,i4
 end
 
 function threadMain()
