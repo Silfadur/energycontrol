@@ -58,8 +58,6 @@ function threadMain()
   print("Rev 1")
   if init() then
     drawScreen()
-    os.startThread(reactorControl)
-    os.startThread(redstoneControl)
     local cell_max=cell1.getMaxEnergyStored()
     local cell1_curr, cell2_curr
     while true do
@@ -88,4 +86,4 @@ function threadMain()
   end --if
 end -- threadMain
 
-shell.run("/thread-api")
+parallel.waitForAll(threadMain,redstoneControl,reactorControl)
