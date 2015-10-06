@@ -8,6 +8,7 @@ end
 
 function reactorControl()
   print("Thread Reactorcontrol started")
+  init()
   local r_max=10000000
   while true do
     r_perc=100*(r.getEnergyStored()/r_max)
@@ -55,7 +56,8 @@ function init()
 end
 
 function threadMain()
-  print("Rev 3")
+  print("Rev 4")
+  init()
   drawScreen()
   local cell_max=cell1.getMaxEnergyStored()
   local cell1_curr, cell2_curr
@@ -84,6 +86,4 @@ function threadMain()
   end --while
 end -- threadMain
 
-if init() then
-  parallel.waitForAll(threadMain,redstoneControl,reactorControl)
-end
+parallel.waitForAll(threadMain,redstoneControl,reactorControl)
