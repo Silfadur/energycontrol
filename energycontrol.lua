@@ -55,7 +55,7 @@ function init()
 end
 
 function threadMain()
-  print("Rev 1")
+  print("Rev 2")
   if init() then
     drawScreen()
     local cell_max=cell1.getMaxEnergyStored()
