@@ -26,6 +26,7 @@ function reactorControl()
 end
 
 function redstoneControl()
+  print("Thread redstonecontrol started")
   while true do
     i1=redstone.getBundledInput("back", colors.purple)
     i2=redstone.getBundledInput("back", colors.cyan)
@@ -56,7 +57,7 @@ function init()
 end
 
 function threadMain()
-  print("Rev 4")
+  print("Rev 5")
   drawScreen()
   local cell_max=cell1.getMaxEnergyStored()
   local cell1_curr, cell2_curr
