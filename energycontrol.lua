@@ -26,17 +26,21 @@ end
 
 function redstoneControl()
   while true do
+    i1=redstone.getBundledInput("back", colors.purple)
+    i2=redstone.getBundledInput("back", colors.cyan)
+    i3=redstone.getBundledInput("back", colors.lightGray)
+    i4=redstone.getBundledInput("back", colors.gray)
+    if q1 then
+      redstone.setBundledInput("back", colors.brown)
+    else
+      redstone.setBundledInput("back", colors.white)
+    end
+    
     event= os.pullEvent()
-    if (event == "redstone") then
-      print("redstone event")
-      i1=redstone.getBundledInput("back", colors.purple)
-      i2=redstone.getBundledInput("back", colors.cyan)
-      i3=redstone.getBundledInput("back", colors.lightGray)
-      i4=redstone.getBundledInput("back", colors.gray)
-      if q1 then
-        redstone.setBundledInput("back", colors.brown)
-      else
-        redstone.setBundledInput("back", colors.white)
+    while true do
+      if (event == "redstone") then
+        print("redstone event")
+        break
       end
     end
   end
@@ -47,11 +51,11 @@ function init()
   r=peripheral.wrap("bottom")
   cell1=peripheral.wrap("tile_thermalexpansion_cell_resonant_name_0")
   cell2=peripheral.wrap("tile_thermalexpansion_cell_resonant_name_1")
-  i1,i2,i3,i4 = false
   return (mon and r and cell1 and cell2)
 end
 
 function threadMain()
+  print("Rev 1")
   if init() then
     drawScreen()
     os.startThread(reactorControl)
