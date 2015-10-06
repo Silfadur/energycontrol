@@ -1,3 +1,4 @@
+mon, r, cell1,cell2,i1,i2,i3,i4
 function drawScreen()
   print("draw screen")
 end
@@ -8,7 +9,6 @@ end
 
 function reactorControl()
   print("Thread Reactorcontrol started")
-  init()
   local r_max=10000000
   while true do
     r_perc=100*(r.getEnergyStored()/r_max)
@@ -57,7 +57,6 @@ end
 
 function threadMain()
   print("Rev 4")
-  init()
   drawScreen()
   local cell_max=cell1.getMaxEnergyStored()
   local cell1_curr, cell2_curr
@@ -85,5 +84,6 @@ function threadMain()
     refreshScreen()
   end --while
 end -- threadMain
-
-parallel.waitForAll(threadMain,redstoneControl,reactorControl)
+if init() then
+  parallel.waitForAll(threadMain,redstoneControl,reactorControl)
+end
