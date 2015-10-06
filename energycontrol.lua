@@ -55,35 +55,35 @@ function init()
 end
 
 function threadMain()
-  print("Rev 2")
-  if init() then
-    drawScreen()
-    local cell_max=cell1.getMaxEnergyStored()
-    local cell1_curr, cell2_curr
+  print("Rev 3")
+  drawScreen()
+  local cell_max=cell1.getMaxEnergyStored()
+  local cell1_curr, cell2_curr
+  while true do
+   local timerid = os.startTimer(5)
+    local event, param
     while true do
-      local timerid = os.startTimer(5)
-      local event, param
-      while true do
-        event, param= os.pullEvent()
-        if event == "timer" and param == timerid then
-          break
-        end --if
-      end -- while
-      cell1_curr = cell1.getEnergyStored()
-      cell1_curr = cell1.getEnergyStored()
-      cell1_perc=math.floor(100*(cell1_curr/cell_max))
-      cell2_perc=math.floor(100*(cell2_curr/cell_max))
-      if cell1_perc < 10 and cell2_perc < 10 then
-        q1=true
-        os.queueEvent("redstone")
-      end
-      if cell1_perc > 90 and cell2_perc > 90 then
-        q1=false
-        os.queueEvent("redstone")
-      end
-      refreshScreen()
-    end --while
-  end --if
+     event, param= os.pullEvent()
+     if event == "timer" and param == timerid then
+       break
+     end --if
+   end -- while
+    cell1_curr = cell1.getEnergyStored()
+    cell1_curr = cell1.getEnergyStored()
+    cell1_perc=math.floor(100*(cell1_curr/cell_max))
+    cell2_perc=math.floor(100*(cell2_curr/cell_max))
+   if cell1_perc < 10 and cell2_perc < 10 then
+      q1=true
+      os.queueEvent("redstone")
+    end
+    if cell1_perc > 90 and cell2_perc > 90 then
+     q1=false
+     os.queueEvent("redstone")
+    end
+    refreshScreen()
+  end --while
 end -- threadMain
 
-parallel.waitForAll(threadMain,redstoneControl,reactorControl)
+if init() then
+  parallel.waitForAll(threadMain,redstoneControl,reactorControl)
+end
