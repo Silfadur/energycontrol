@@ -13,7 +13,14 @@ function reactorControl()
     r_perc=100*(r.getEnergyStored()/r_max)
     r.setAllControlRodLevels(math.floor(r_perc))
     r.setActive(i1 and r_perc < 99)
-    sleep(1)
+    local timerid = os.startTimer(1)
+    local event, param
+    while true do
+     event, param= os.pullEvent()
+      if event == "timer" and param == timerid then
+       break
+      end
+    end
   end
 end
 
